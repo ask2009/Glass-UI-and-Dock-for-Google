@@ -1,0 +1,15 @@
+#app-view {
+    background-color: var(--glass-color);
+    border-radius: calc(var(--dock-height)/4);
+    width: auto;
+    height: calc(80vh - var(--dock-height)*2.5);
+    position: fixed;
+    bottom: calc(var(--dock-height)*2.5);
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    outline: 1px solid rgba(155, 155, 155, 0.174);
+    z-index: 9999;
+    backdrop-filter: var(--drop);
+    padding: var(--margin);
+}
