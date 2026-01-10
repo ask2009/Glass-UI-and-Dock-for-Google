@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "Glass UI and Dock for Google",
+  "version": "1.0.0",
+  "description": "Enhances the Google search page with a glass-style UI and a customizable dock by injecting CSS and JavaScript. Does not replace the browser new tab page.",
+
+  "icons": {
+    "16": "icon/icon-16.png",
+    "48": "icon/icon-48.png",
+    "96": "icon/icon-96.png",
+    "128": "icon/icon-128.png"
+  },
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "glass-ui-dock-google@example.com",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://www.google.com/*"],
+      "js": ["dist/content.js"],
+      "css": [
+        "src/google.css",
+        "src/theme-config.css",
+        "src/dock.css",
+        "src/app-view.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "src/wallpaper/image.jpeg",
+        "src/wallpaper/image-light.jpeg"
+      ],
+      "matches": ["https://www.google.com/*"]
+    }
+  ]
+}

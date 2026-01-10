@@ -1,0 +1,104 @@
+:root {
+    --dock-height: calc(var(--theme-radius)*3);
+    --app-background: rgb(255, 255, 255);
+}
+@media (prefers-color-scheme: light) {
+    :root {
+        --app-background: rgb(255, 255, 255);
+    }
+}
+#dock {
+    display: flex; /* 中身を横並びに */
+    background-color: var(--glass-color);
+    backdrop-filter: var(--drop);
+    outline: 1px solid rgba(155, 155, 155, 0.174);
+    height: var(--dock-height);
+    max-width: 80vw;
+    width: auto;
+    position: fixed;
+    bottom: calc(var(--margin)*2);
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, 120%);
+    transition:
+      opacity 0.5s ease,
+      transform 0.2s ease; 
+    z-index: 9999;
+    padding: calc(var(--margin));
+    border-radius: calc(var(--theme-radius)*3/2);
+    align-items: center;
+}
+
+#dock div a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--dock-height);
+    height: var(--dock-height);
+    border-radius: var(--theme-radius);
+    margin: calc(var(--margin)/2);
+    background-color: var(--app-background);
+    transition: transform 200ms ease;/* アニメーション時間 */
+    transform-origin: center bottom;
+}
+#dock div a:hover {
+    transform: scale(1.08);
+}
+#dock div a img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    object-fit: contain;
+    border-radius: var(--theme-radius);
+}
+#pinned-app,
+#app-menu {
+    display: flex;
+    align-items: center;  /* ←追加 */
+    height: 100%;
+    margin: 0;
+}
+
+#pinned-app {
+    flex: 1;
+}
+
+#app-menu {
+    justify-content: center;
+    width: var(--dock-height);
+}
+#app-menu button {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    margin-left: var(--margin);
+    object-fit: contain;
+    border-radius: var(--theme-radius);
+    background-color: var(--background-color);
+    border: none;
+}
+#app-menu button:hover {
+    transform: scale(1.08);
+}
+#app-menu button svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--accent-color);
+}
+
+#dock-area {
+    display: block;
+    height: calc(var(--dock-height)*2);
+    min-width: 50vw;
+    max-width: 80vw;
+    width: auto;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9998;
+    background-color: rgba(250, 235, 215, 0);
+
+}

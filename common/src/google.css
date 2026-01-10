@@ -1,0 +1,74 @@
+:root {
+    --xhUGwc: transparent !important; /*検索の結果*/
+    --cIehld: rgb(44, 44, 46) !important;
+}
+html, body {
+    background-image: url("/src/wallpaper/image.jpeg") !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-attachment: fixed !important;
+}
+@media (prefers-color-scheme: light) {
+  html, body {
+    background-image: url("/src/wallpaper/image-light.jpeg") !important;
+  }
+  :root {
+    --cIehld: rgba(255, 255, 255, 0.658) !important;
+  }
+}
+
+.IzOpfd,
+.lnXdpd,
+.FPdoLc.lJ9FBc,
+.plR5qb,
+.XDyW0e,
+.gb_1,
+#Odp5De, /*aiによる概要*/
+.uU7dJb,
+.lJ9FBc center,
+.lJ9FBc,
+.MV3Tnb,
+.jFulub,
+#fbarcnt,
+#oFNiHe,
+.KxwPGc .AghGtd /*広告、ビジネス、検索の仕組み*/ 
+{
+    display: none !important;
+}
+
+
+
+.aajZCb,.RNNXgb,.Ui8pyc div div div div div a, .c93Gbe, .RNNXgb,.jKSUhb, .vIifob  {
+    background-color: var(--glass-color) !important;
+    backdrop-filter: var(--drop);
+    outline: var(--outline);
+}
+.jKSUhb {
+    border-radius: var(--theme-radius);
+    padding: calc(var(--margin)*2);
+}
+.Ui8pyc div div div div div a {
+    border: var(--outline);
+}
+body {
+    background-color: var(--background-color) !important;
+}
+.tDXSGe {
+    margin-left: calc(var(--margin)*2) !important;
+}
+.DxD10e {
+    padding-bottom: calc(var(--margin)*2) !important;
+}
+.ADHj4e {
+    padding: 0 !important;
+}
+.om7nvf {
+    padding: calc(var(--margin)*2) !important;
+}
+.aajZCb {
+    box-shadow: none !important;
+}
+.dRYYxd {
+    background-color: transparent !important;
+} 

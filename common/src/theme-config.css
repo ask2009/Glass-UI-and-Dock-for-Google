@@ -1,0 +1,30 @@
+:root {
+  --theme-radius: 16px;
+  --margin: var(--theme-radius)/2;
+  --drop: blur(10px) brightness(1.05);
+  --outline: 0.5px rgba(255, 255, 255, 0.816) solid;
+  --blight-outline: white;
+  --glass-color: rgba(255, 255, 255, 0.667) !important;
+  --color: black;
+  --background-color: white;
+  --accent-color: rgba(66, 66, 66, 0.782);
+  --scrollbar-width: thin;
+  --scrollbar-color: gray;
+  --webkit-scrollbar-width: calc(1em/4);
+  --webkit-scrollbar-height: 40%;
+  --webkit-scrollbar-track-background: transparent;
+  --webkit-scrollbar-thumb-background: var(--scrollbar-color);
+  --webkit-scrollbar-thumb-border-radius: calc(1em/8);
+  --webkit-scrollbar-thumb-hover-background: var(--scrollbar-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --opaque-background-color: rgb(68, 68, 68);
+    --outline: 0.5px rgba(84, 84, 84, 0.816) solid;
+    --glass-color: rgba(25, 25, 25, 0.6) !important;
+    --color: white;
+    --background-color: rgba(28, 28, 30, 0.793) !important;
+    --accent-color: rgba(255, 255, 255, 0.632);
+  }
+}

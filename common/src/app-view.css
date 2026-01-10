@@ -1,0 +1,66 @@
+#app-view {
+    background-color: var(--glass-color);
+    border-radius: calc(var(--theme-radius)*3/2);
+    width: calc(8 * (var(--dock-height) + var(--margin)*2) + var(--margin)*2 + var(--spacing-3)*2) !important;/*reactariaのタブのpadding*/
+    height: calc(80vh - var(--dock-height) * 2.5);
+    position: fixed;
+    bottom: calc(var(--dock-height) * 2);
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    outline: 1px solid rgba(155, 155, 155, 0.174);
+    z-index: 9999;
+    backdrop-filter: var(--drop);
+    padding: calc(var(--margin));
+}
+#app-view-content {
+    display: grid;
+    width: calc(8 * (var(--dock-height) + var(--margin)*2) + var(--margin)*2);
+    grid-template-columns: repeat(8, minmax(var(--dock-height), 1fr));
+    gap: calc(var(--margin)*2);
+    height: calc(80vh - var(--dock-height) * 2.5 - var(--margin)*8); /* 固定高さ */
+    justify-content: start; 
+    align-content: start;
+    padding-right: calc(var(--webkit-scrollbar-width) + var(--dock-height)*0.08) !important;
+    padding-top: calc(var(--dock-height)*0.08) !important;
+    padding-left: calc(var(--dock-height)*0.08) !important;
+    padding-bottom: calc(var(--dock-height)*0.08) !important;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    /* Firefox用 */
+    scrollbar-width: var(--scrollbar-width); /* thin, auto */
+    scrollbar-color: var(--scrollbar-color) transparent; /* thumb, track */
+}
+
+
+#app-view-content::-webkit-scrollbar {
+    width: var(--webkit-scrollbar-width);
+    height: var(--webkit-scrollbar-height);
+}
+
+#app-view-content::-webkit-scrollbar-track {
+    background: var(--webkit-scrollbar-track-background);
+}
+
+#app-view-content::-webkit-scrollbar-thumb {
+    background: var(--webkit-scrollbar-thumb-background);
+    border-radius: var(--webkit-scrollbar-thumb-border-radius);
+}
+
+#app-view-content::-webkit-scrollbar-thumb:hover {
+    background: var(--webkit-scrollbar-thumb-hover-background);
+}
+
+
+
+#app-view-content a {
+    width: 100%;
+    aspect-ratio: 1;
+    display: block;
+    background-color: rgb(255, 255, 255); /* 仮の見た目 */
+    border-radius: var(--theme-radius);
+}
+#app-view-content a:hover{
+    transform: scale(1.08);;
+}
