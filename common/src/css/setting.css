@@ -1,0 +1,7 @@
+#setting Disclosure {
+    width: 100% !important;
+}
+TextArea {
+    resize: vertical;
+    width: 100%;
+}

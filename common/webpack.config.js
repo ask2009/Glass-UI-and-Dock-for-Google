@@ -27,6 +27,6 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"]  // TypeScript追加
   },
-  mode: "production",
+  mode: "development",
   devtool: false
 };

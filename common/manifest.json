@@ -25,10 +25,11 @@
       "matches": ["https://www.google.com/*"],
       "js": ["dist/content.js"],
       "css": [
-        "src/google.css",
-        "src/theme-config.css",
-        "src/dock.css",
-        "src/app-view.css"
+        "src/css/google.css",
+        "src/css/theme-config.css",
+        "src/css/dock.css",
+        "src/css/app-view.css",
+        "src/css/setting.css"
       ],
       "run_at": "document_idle"
     }

@@ -1,12 +1,10 @@
 // @ts-nocheck
 import React, { useEffect, useState, useRef } from "react";
+
 import { createRoot } from "react-dom/client";
 import {
   Switch,
   Separator,
-  Disclosure,
-  DisclosureHeader,
-  DisclosurePanel,
   Button,
   Tabs,
   TabList,
@@ -16,6 +14,9 @@ import {
   ComboBox,
   ComboBoxItem,
   ComboBoxListBox,
+  DisclosureContext,
+  Disclosure,
+  DisclosurePanel,
   TextArea,
   TextAreaContext,
   Input,
@@ -23,7 +24,9 @@ import {
   TextField,
   TextContext,
   Label,
+  Heading,
 } from "react-aria-components";
+import { ChevronRight} from "lucide-react";
 
 import './component/Button.css';
 import './component/ComboBox.css';
@@ -37,6 +40,7 @@ import './component/Switch.css';
 import './component/Tabs.css';
 import './component/theme.css';
 import './component/utilities.css';
+
 
 const apps = [
   { href: "https://chatgpt.com" },
@@ -115,6 +119,10 @@ function App() {
     };
   }, [appViewVisible]);
 
+  /*設定処理*/
+
+
+
   return (
     <>
       <div
@@ -168,9 +176,21 @@ function App() {
               </div>
             </TabPanel>
             <TabPanel id="setting">
-              <TextField label="plese edit pinned-app">
-                <TextArea className="react-aria-TextArea inset"></TextArea>
-              </TextField>
+              <Disclosure>
+                <Heading>
+                  <Button slot="trigger"  className="disclosure-button">
+                    Pinned App
+                  <ChevronRight className="chevron" size={16}/>
+                  </Button>
+                </Heading>
+                <DisclosurePanel>
+                  <TextField>
+                    <Label>plese edit pinned-app</Label>
+                    <TextArea className="react-aria-TextArea inset" value={pinnedAppInput} onChange={setPinnedAppInput}></TextArea>
+                  </TextField>
+                  <Button className="react-aria-Button button-base" onPress={handleApplyPinnedApp}>apply</Button>
+                </DisclosurePanel>
+              </Disclosure>
             </TabPanel>
           </TabPanels>
         </Tabs>
@@ -181,7 +201,11 @@ function App() {
   );
 }
 
+
+
+
 const container = document.createElement("div");
 document.body.prepend(container);
 const root = createRoot(container);
 root.render(<App />);
+

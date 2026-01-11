@@ -25,7 +25,7 @@ if (!fs.existsSync(manifestPath)) {
 }
 
 // --- google.css URL 置換 ---
-const cssPath = path.join(__dirname, 'chrome', 'src', 'google.css');
+const cssPath = path.join(__dirname, 'chrome', 'src', "css", 'google.css');
 
 if (!fs.existsSync(cssPath)) {
   console.error('CSS ファイルが存在しません:', cssPath);

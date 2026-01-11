@@ -1,7 +1,7 @@
 @import "./theme.css";
 
 .react-aria-Disclosure {
-  width: calc(var(--spacing) * 50);
+  width: 100%;
 
   .react-aria-Heading {
     margin: 0;

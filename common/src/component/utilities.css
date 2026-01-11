@@ -1,3 +1,4 @@
+@import url(theme.css);
 @layer utilities {
   /* utility that creates a button-like element, which can be optionally selected */
   .button-base {
