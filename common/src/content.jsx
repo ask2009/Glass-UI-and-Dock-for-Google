@@ -120,7 +120,10 @@ function App() {
   }, [appViewVisible]);
 
   /*設定処理*/
-
+  function handleApplyPinnedApp() {
+    return;
+  }
+  const [pinnedAppInput, setPinnedAppInput] = useState(""); 
 
 
   return (
