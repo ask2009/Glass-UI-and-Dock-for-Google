@@ -5,7 +5,7 @@ setlocal
 cd /d "%~dp0common"
 call npx webpack
 if errorlevel 1 (
-  echo webpack に失敗しました
+  echo common webpack に失敗しました
   pause
   exit /b 1
 )
@@ -25,10 +25,17 @@ robocopy "%source%" "%destination2%" /E /COPY:DATS /R:3 /W:5 ^
 /XF ".babelrc" "package.json" "package-lock.json" "webpack.config.js" "tsconfig.json" ^
 /XD "node_modules"
 
-echo すべてのコピー完了
+echo コピー完了
 
-:: ===== chrome-patch.js 実行 =====
+:: ===== chrome 用パッチ適用 =====
 cd /d "%~dp0"
 node chrome-patch.js
+if errorlevel 1 (
+  echo chrome-patch に失敗しました
+  pause
+  exit /b 1
+)
 
+
+echo Chrome 用ビルド完了
 pause

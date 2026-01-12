@@ -40,3 +40,4 @@ if (!fs.existsSync(cssPath)) {
   fs.writeFileSync(cssPath, cssContent, 'utf-8');
   console.log('CSS 内の URL を置換しました:', cssPath);
 }
+

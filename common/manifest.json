@@ -2,6 +2,7 @@
   "manifest_version": 3,
   "name": "Glass UI and Dock for Google",
   "version": "1.0.0",
+  "permissions": ["storage"],
   "description": "Enhances the Google search page with a glass-style UI and a customizable dock by injecting CSS and JavaScript. Does not replace the browser new tab page.",
 
   "icons": {
@@ -43,5 +44,9 @@
       ],
       "matches": ["https://www.google.com/*"]
     }
-  ]
+  ],
+  "action": {
+    "default_popup": "popup/popup.html"
+  }
+
 }

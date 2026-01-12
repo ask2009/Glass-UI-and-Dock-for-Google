@@ -107,6 +107,13 @@ function App() {
   }, [appViewVisible]);
 
   /*設定処理*/
+  const storage =
+  typeof chrome !== "undefined" && chrome.storage
+    ? chrome.storage
+    : typeof browser !== "undefined"
+    ? browser.storage
+    : null;
+
   const [apps, setApps] = useState([
     { href: "https://chatgpt.com" },
     { href: "https://icloud.com" },
@@ -116,20 +123,24 @@ function App() {
     { href: "https://abema.tv" },
     { href: "https://x.com" },
   ]);
+
   const [pinnedAppInput, setPinnedAppInput] = useState(""); 
   useEffect(() => {
-    const savedApps = JSON.parse(localStorage.getItem("pinnedApps") || "[]");
-    if (savedApps.length) {
-      setApps(savedApps);
-      setPinnedAppInput(JSON.stringify(savedApps, null, 2));
-    } else {
-      setPinnedAppInput(JSON.stringify(apps, null, 2));
-    }
+    (async () => {
+      const result = await storage.local.get("pinnedApps");
+      const savedApps = result.pinnedApps ?? [];
+      if (savedApps.length) {
+        setApps(savedApps);
+        setPinnedAppInput(JSON.stringify(savedApps, null, 2));
+      } else {
+        setPinnedAppInput(JSON.stringify(apps, null, 2));
+      }
+    })();
   }, []);
 
-  function handleApplyPinnedApp() {
+  async function handleApplyPinnedApp() {
     const parsedApps = JSON.parse(pinnedAppInput);
-    localStorage.setItem("pinnedApps", JSON.stringify(parsedApps));
+    await storage.local.set({ pinnedApps: parsedApps });
     setApps(parsedApps);
   }
   
@@ -182,47 +193,6 @@ function App() {
             <TabPanel id="home">
               <div id="app-view-content">
                 <a href="https://toshin.com/">東進</a>
-                <a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a><a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a><a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a><a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a><a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a><a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a><a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a><a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a><a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a><a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a><a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a><a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a>
-                <a>aaa</a>
               </div>
             </TabPanel>
             <TabPanel id="setting">
