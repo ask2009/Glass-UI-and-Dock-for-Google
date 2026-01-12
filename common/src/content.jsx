@@ -42,15 +42,6 @@ import './component/theme.css';
 import './component/utilities.css';
 
 
-/*const apps = [
-  { href: "https://chatgpt.com" },
-  { href: "https://icloud.com" },
-  { href: "https://youtube.com" },
-  { href: "https://epicgames.com" },
-  { href: "https://github.com" },
-  { href: "https://abema.tv" },
-  { href: "https://x.com" },
-];*/
 
 function App() {
   const appViewRef = useRef(null);
@@ -195,24 +186,74 @@ function App() {
                 <a>aaa</a>
                 <a>aaa</a>
                 <a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a><a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a><a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a><a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a><a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a><a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a><a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a><a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a><a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a><a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a><a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a><a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a>
+                <a>aaa</a>
               </div>
             </TabPanel>
             <TabPanel id="setting">
-              <Disclosure>
-                <Heading>
-                  <Button slot="trigger"  className="disclosure-button">
-                    Pinned App
-                  <ChevronRight className="chevron" size={16}/>
-                  </Button>
-                </Heading>
-                <DisclosurePanel>
-                  <TextField>
-                    <Label>plese edit pinned-app</Label>
-                    <TextArea className="react-aria-TextArea inset" value={pinnedAppInput} onChange={(e) => setPinnedAppInput(e.target.value)}></TextArea>
-                  </TextField>
-                  <Button className="react-aria-Button button-base" onPress={handleApplyPinnedApp}>apply</Button>
-                </DisclosurePanel>
-              </Disclosure>
+              <div>
+                <Disclosure>
+                  <Heading>
+                    <Button slot="trigger"  className="disclosure-button">Pinned App<ChevronRight className="chevron" size={16}/>
+                    </Button>
+                  </Heading>
+                  <DisclosurePanel class="setting-panel">
+                    <TextField>
+                      <Label>Select apps</Label>
+                      <TextArea className="react-aria-TextArea inset setting-text-area" value={pinnedAppInput} onChange={(e) => setPinnedAppInput(e.target.value)}></TextArea>
+                    </TextField>
+                    <Button className="react-aria-Button button-base" onPress={handleApplyPinnedApp}>apply</Button>
+                  </DisclosurePanel>
+                </Disclosure>
+                <Disclosure>
+                  <Heading>
+                    <Button slot="trigger"  className="disclosure-button">other App<ChevronRight className="chevron" size={16}/>
+                    </Button>
+                  </Heading>
+                  <DisclosurePanel class="setting-panel">
+                    <TextField>
+                      <Label>Select apps</Label>
+                      <TextArea className="react-aria-TextArea inset setting-text-area"></TextArea>
+                    </TextField>
+                    <Button className="react-aria-Button button-base">apply</Button>
+                  </DisclosurePanel>
+                </Disclosure>
+              </div>
             </TabPanel>
           </TabPanels>
         </Tabs>

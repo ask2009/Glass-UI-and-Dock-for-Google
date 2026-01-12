@@ -11937,7 +11937,8 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.react-aria-Tabs {
   display: flex;
   gap: var(--spacing-2);
   color: var(--text-color);
-  max-width: 100%;
+  width: 100%;
+  height: 100%;
 
   &[data-orientation=horizontal] {
     flex-direction: column;
@@ -11946,7 +11947,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.react-aria-Tabs {
   &[data-orientation=vertical] {
     flex-direction: row;
     width: 100%;
-    .react-aria-TabPanels {
+    .react-aria-TabPanels { 
       flex: 1;
     }
   }
@@ -11954,6 +11955,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.react-aria-Tabs {
 
 .react-aria-TabList {
   display: flex;
+  position: fixed;
 
   .react-aria-SelectionIndicator {
     background: var(--border-color);
@@ -11961,7 +11963,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.react-aria-Tabs {
 
   &[data-orientation=horizontal] {
     border-bottom: 0.5px solid var(--border-color);
-    max-width: 100%;
+    width: calc(100% - var(--margin)*2);
     overflow-x: auto;
     overflow-y: clip;
     scrollbar-width: none;
@@ -12042,11 +12044,15 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.react-aria-Tabs {
 
 .react-aria-TabPanels {
   position: relative;
-  height: var(--tab-panel-height);
+  top: 40px; /*tablistの高さ*/
+  max-height: calc(100% - 40px - var(--margin)*2);
   width: var(--tab-panel-width);
   transition: height 400ms;
-  overflow: clip;
-
+  overflow-y: auto;
+  overflow-x: hidden;
+  div {
+    max-height: 100%;
+  }
   @media (prefers-reduced-motion: reduce) {
     transition: none;
   }
@@ -12058,7 +12064,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.react-aria-Tabs {
   outline: none;
   box-sizing: border-box;
   transition: opacity 400ms;
-
+  
   &[data-focus-visible] {
     outline: 2px solid var(--focus-ring-color);
   }
@@ -46510,17 +46516,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-/*const apps = [
-  { href: "https://chatgpt.com" },
-  { href: "https://icloud.com" },
-  { href: "https://youtube.com" },
-  { href: "https://epicgames.com" },
-  { href: "https://github.com" },
-  { href: "https://abema.tv" },
-  { href: "https://x.com" },
-];*/
-
 function App() {
   const appViewRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   const [dockVisible, setDockVisible] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
@@ -46664,22 +46659,36 @@ function App() {
     id: "app-view-content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
     href: "https://toshin.com/"
-  }, "\u6771\u9032"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_6__.TabPanel, {
+  }, "\u6771\u9032"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", null, "aaa"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_6__.TabPanel, {
     id: "setting"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_3__.Disclosure, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_4__.Heading, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_3__.Disclosure, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_4__.Heading, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     slot: "trigger",
     className: "disclosure-button"
   }, "Pinned App", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], {
     className: "chevron",
     size: 16
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_3__.DisclosurePanel, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_8__.TextField, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_5__.Label, null, "plese edit pinned-app"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_7__.TextArea, {
-    className: "react-aria-TextArea inset",
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_3__.DisclosurePanel, {
+    class: "setting-panel"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_8__.TextField, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_5__.Label, null, "Select apps"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_7__.TextArea, {
+    className: "react-aria-TextArea inset setting-text-area",
     value: pinnedAppInput,
     onChange: e => setPinnedAppInput(e.target.value)
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     className: "react-aria-Button button-base",
     onPress: handleApplyPinnedApp
-  }, "apply"))))))));
+  }, "apply"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_3__.Disclosure, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_4__.Heading, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    slot: "trigger",
+    className: "disclosure-button"
+  }, "other App", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    className: "chevron",
+    size: 16
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_3__.DisclosurePanel, {
+    class: "setting-panel"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_8__.TextField, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_5__.Label, null, "Select apps"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_7__.TextArea, {
+    className: "react-aria-TextArea inset setting-text-area"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    className: "react-aria-Button button-base"
+  }, "apply")))))))));
 }
 const container = document.createElement("div");
 document.body.prepend(container);

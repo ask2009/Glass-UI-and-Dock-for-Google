@@ -72,3 +72,13 @@ body {
 .dRYYxd {
     background-color: transparent !important;
 } 
+
+
+.c93Gbe {
+    width: fit-content !important; 
+    border-radius: 0 var(--theme-radius) 0 0;
+}
+.cF4V5c {
+    background-color: var(--glass-color) !important;
+    backdrop-filter: var(--drop);
+}

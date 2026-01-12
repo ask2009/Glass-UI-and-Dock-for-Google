@@ -1,7 +1,18 @@
-#setting Disclosure {
+#setting div Disclosure {
     width: 100% !important;
+    height: 100%;
+    height: 200px;
 }
-TextArea {
-    resize: vertical;
+.Setting-panel {
+    height: 200px;
     width: 100%;
+}
+.setting-text-area {
+    height: 150px;
+    resize: none;
+    width: 100%;
+}
+#setting div {
+    padding: var(--margin);
+    overflow-y: auto;
 }

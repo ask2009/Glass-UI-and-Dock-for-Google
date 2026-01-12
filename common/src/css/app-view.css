@@ -3,6 +3,7 @@
     border-radius: calc(var(--theme-radius)*3/2);
     width: calc(8 * (var(--dock-height) + var(--margin)*2) + var(--margin)*2 + var(--spacing-3)*2) !important;/*reactariaのタブのpadding*/
     height: calc(80vh - var(--dock-height) * 2.5);
+    min-height: 350px;
     position: fixed;
     bottom: calc(var(--dock-height) * 2);
     left: 50%;
@@ -18,7 +19,7 @@
     width: calc(8 * (var(--dock-height) + var(--margin)*2) + var(--margin)*2);
     grid-template-columns: repeat(8, minmax(var(--dock-height), 1fr));
     gap: calc(var(--margin)*2);
-    height: calc(80vh - var(--dock-height) * 2.5 - var(--margin)*8); /* 固定高さ */
+    height: 100%;
     justify-content: start; 
     align-content: start;
     padding-right: calc(var(--webkit-scrollbar-width) + var(--dock-height)*0.08) !important;
