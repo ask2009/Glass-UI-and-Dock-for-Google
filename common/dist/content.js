@@ -46510,21 +46510,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const apps = [{
-  href: "https://chatgpt.com"
-}, {
-  href: "https://icloud.com"
-}, {
-  href: "https://youtube.com"
-}, {
-  href: "https://epicgames.com"
-}, {
-  href: "https://github.com"
-}, {
-  href: "https://abema.tv"
-}, {
-  href: "https://x.com"
-}];
+
+/*const apps = [
+  { href: "https://chatgpt.com" },
+  { href: "https://icloud.com" },
+  { href: "https://youtube.com" },
+  { href: "https://epicgames.com" },
+  { href: "https://github.com" },
+  { href: "https://abema.tv" },
+  { href: "https://x.com" },
+];*/
+
 function App() {
   const appViewRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   const [dockVisible, setDockVisible] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
@@ -46565,8 +46561,6 @@ function App() {
       observer.disconnect();
     };
   }, []);
-
-  // アプリビュー外クリックで閉じる
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     const handleClickOutside = event => {
       if (appViewRef.current && !appViewRef.current.contains(event.target)) {
@@ -46584,10 +46578,36 @@ function App() {
   }, [appViewVisible]);
 
   /*設定処理*/
-  function handleApplyPinnedApp() {
-    return;
-  }
+  const [apps, setApps] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([{
+    href: "https://chatgpt.com"
+  }, {
+    href: "https://icloud.com"
+  }, {
+    href: "https://youtube.com"
+  }, {
+    href: "https://epicgames.com"
+  }, {
+    href: "https://github.com"
+  }, {
+    href: "https://abema.tv"
+  }, {
+    href: "https://x.com"
+  }]);
   const [pinnedAppInput, setPinnedAppInput] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const savedApps = JSON.parse(localStorage.getItem("pinnedApps") || "[]");
+    if (savedApps.length) {
+      setApps(savedApps);
+      setPinnedAppInput(JSON.stringify(savedApps, null, 2));
+    } else {
+      setPinnedAppInput(JSON.stringify(apps, null, 2));
+    }
+  }, []);
+  function handleApplyPinnedApp() {
+    const parsedApps = JSON.parse(pinnedAppInput);
+    localStorage.setItem("pinnedApps", JSON.stringify(parsedApps));
+    setApps(parsedApps);
+  }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     id: "dock-area",
     style: {
@@ -46655,7 +46675,7 @@ function App() {
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_3__.DisclosurePanel, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_8__.TextField, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_5__.Label, null, "plese edit pinned-app"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_7__.TextArea, {
     className: "react-aria-TextArea inset",
     value: pinnedAppInput,
-    onChange: setPinnedAppInput
+    onChange: e => setPinnedAppInput(e.target.value)
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     className: "react-aria-Button button-base",
     onPress: handleApplyPinnedApp

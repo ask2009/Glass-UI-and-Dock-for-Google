@@ -26,7 +26,7 @@ import {
   Label,
   Heading,
 } from "react-aria-components";
-import { ChevronRight} from "lucide-react";
+import { ChevronRight, PinIcon} from "lucide-react";
 
 import './component/Button.css';
 import './component/ComboBox.css';
@@ -42,7 +42,7 @@ import './component/theme.css';
 import './component/utilities.css';
 
 
-const apps = [
+/*const apps = [
   { href: "https://chatgpt.com" },
   { href: "https://icloud.com" },
   { href: "https://youtube.com" },
@@ -50,16 +50,14 @@ const apps = [
   { href: "https://github.com" },
   { href: "https://abema.tv" },
   { href: "https://x.com" },
-];
+];*/
 
 function App() {
   const appViewRef = useRef(null);
-
   const [dockVisible, setDockVisible] = useState(true);
   const [dockHover, setDockHover] = useState(false);
   const [lockDockHover, setLockDockHover] = useState(false);
   const [appViewVisible, setAppViewVisible] = useState(false);
-
   const toggleAppView = () => {
     setLockDockHover(prev => !prev);
     setAppViewVisible(prev => !prev);
@@ -100,8 +98,6 @@ function App() {
       observer.disconnect();
     };
   }, []);
-
-  // アプリビュー外クリックで閉じる
   useEffect(() => {
     const handleClickOutside = event => {
       if (appViewRef.current && !appViewRef.current.contains(event.target)) {
@@ -120,10 +116,33 @@ function App() {
   }, [appViewVisible]);
 
   /*設定処理*/
-  function handleApplyPinnedApp() {
-    return;
-  }
+  const [apps, setApps] = useState([
+    { href: "https://chatgpt.com" },
+    { href: "https://icloud.com" },
+    { href: "https://youtube.com" },
+    { href: "https://epicgames.com" },
+    { href: "https://github.com" },
+    { href: "https://abema.tv" },
+    { href: "https://x.com" },
+  ]);
   const [pinnedAppInput, setPinnedAppInput] = useState(""); 
+  useEffect(() => {
+    const savedApps = JSON.parse(localStorage.getItem("pinnedApps") || "[]");
+    if (savedApps.length) {
+      setApps(savedApps);
+      setPinnedAppInput(JSON.stringify(savedApps, null, 2));
+    } else {
+      setPinnedAppInput(JSON.stringify(apps, null, 2));
+    }
+  }, []);
+
+  function handleApplyPinnedApp() {
+    const parsedApps = JSON.parse(pinnedAppInput);
+    localStorage.setItem("pinnedApps", JSON.stringify(parsedApps));
+    setApps(parsedApps);
+  }
+  
+ 
 
 
   return (
@@ -146,9 +165,9 @@ function App() {
               const domain = new URL(app.href).hostname;
               const faviconUrl = `https://www.google.com/s2/favicons?sz=256&domain=${domain}`;
               return (
-                <a key={i} href={app.href} target="_blank" rel="noopener noreferrer">
-                  <img src={faviconUrl} alt={app.href} />
-                </a>
+              <a key={i} href={app.href} target="_blank" rel="noopener noreferrer">
+                <img src={faviconUrl} alt={app.href} />
+              </a>
               );
             })}
           </div>
@@ -189,7 +208,7 @@ function App() {
                 <DisclosurePanel>
                   <TextField>
                     <Label>plese edit pinned-app</Label>
-                    <TextArea className="react-aria-TextArea inset" value={pinnedAppInput} onChange={setPinnedAppInput}></TextArea>
+                    <TextArea className="react-aria-TextArea inset" value={pinnedAppInput} onChange={(e) => setPinnedAppInput(e.target.value)}></TextArea>
                   </TextField>
                   <Button className="react-aria-Button button-base" onPress={handleApplyPinnedApp}>apply</Button>
                 </DisclosurePanel>
