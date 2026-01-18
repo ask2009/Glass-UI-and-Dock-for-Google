@@ -143,6 +143,68 @@ function App() {
     await storage.local.set({ pinnedApps: parsedApps });
     setApps(parsedApps);
   }
+  /*アイコンシステム*/
+  const localIconMap = {
+    // ゲーム・ランチャー
+    'steam:': 'https://store.steampowered.com/favicon.ico',
+    'com.epicgames.launcher:': 'https://www.google.com/s2/favicons?domain=epicgames.com&sz=256',
+    'minecraft:': 'https://www.google.com/s2/favicons?domain=minecraft.net&sz=256',
+    'roblox:': 'https://www.google.com/s2/favicons?domain=roblox.com&sz=256',
+    'battle.net:': 'https://www.google.com/s2/favicons?domain=blizzard.com&sz=256',
+    'uplay:': 'https://www.google.com/s2/favicons?domain=ubisoft.com&sz=256',
+
+    // ブラウザ
+    'microsoft-edge:': 'https://www.google.com/s2/favicons?domain=microsoft.com&sz=256',
+    'chrome:': 'https://www.google.com/s2/favicons?domain=google.com&sz=256',
+    'firefox:': 'https://www.google.com/s2/favicons?domain=mozilla.org&sz=256',
+
+    // 開発・ツール
+    'vscode:': 'https://www.google.com/s2/favicons?domain=visualstudio.microsoft.com&sz=256',
+    'visualstudio:': 'https://www.google.com/s2/favicons?domain=visualstudio.microsoft.com&sz=256',
+    'github:': 'https://www.google.com/s2/favicons?domain=github.com&sz=256',
+    'docker:': 'https://www.google.com/s2/favicons?domain=docker.com&sz=256',
+    'terminal:': 'https://www.google.com/s2/favicons?domain=gnu.org&sz=256',
+
+    // 仕事・ドキュメント
+    'ms-word:': 'https://www.google.com/s2/favicons?domain=microsoft.com&sz=256',
+    'ms-excel:': 'https://www.google.com/s2/favicons?domain=microsoft.com&sz=256',
+    'ms-powerpoint:': 'https://www.google.com/s2/favicons?domain=microsoft.com&sz=256',
+    'ms-windows-store:': 'https://www.google.com/s2/favicons?domain=microsoft.com&sz=256',
+
+    // コミュニケーション
+    'discord:': 'https://www.google.com/s2/favicons?domain=discord.com&sz=256',
+    'slack:': 'https://www.google.com/s2/favicons?domain=slack.com&sz=256',
+    'teams:': 'https://www.google.com/s2/favicons?domain=microsoft.com&sz=256',
+    'mailto:': 'https://www.google.com/s2/favicons?domain=outlook.com&sz=256',
+
+    // メディア
+    'spotify:': 'https://www.google.com/s2/favicons?domain=spotify.com&sz=256',
+    'youtube:': 'https://www.google.com/s2/favicons?domain=youtube.com&sz=256',
+    'netflix:': 'https://www.google.com/s2/favicons?domain=netflix.com&sz=256',
+
+    // ファイル・クラウド
+    'files-stable:': 'https://www.google.com/s2/favicons?domain=files.community&sz=256',
+    'onedrive:': 'https://www.google.com/s2/favicons?domain=onedrive.live.com&sz=256',
+    'google-drive:': 'https://www.google.com/s2/favicons?domain=drive.google.com&sz=256'
+  };
+
+  const getIcon = (href) => {
+    try {
+      const url = new URL(href);
+      if (localIconMap[url.protocol]) {
+        return localIconMap[url.protocol];
+      }
+      if (localIconMap[url.hostname]) {
+        return localIconMap[url.hostname];
+      }
+      // 通常の web favicon
+      return `https://www.google.com/s2/favicons?sz=256&domain=${url.hostname}`;
+    } catch {
+      // URL として解釈できない場合
+      return '/app-icons/defalt.png';
+    }
+  };
+
   
  
 
@@ -162,17 +224,13 @@ function App() {
             transition: "transform 0.2s ease, opacity 0.2s ease",
           }}
         >
-          <div id="pinned-app">
-            {apps.map((app, i) => {
-              const domain = new URL(app.href).hostname;
-              const faviconUrl = `https://www.google.com/s2/favicons?sz=256&domain=${domain}`;
-              return (
-              <a key={i} href={app.href} target="_blank" rel="noopener noreferrer">
-                <img src={faviconUrl} alt={app.href} />
-              </a>
-              );
-            })}
-          </div>
+        <div id="pinned-app">
+          {apps.map((app, i) => (
+            <a key={i} href={app.href} target="_blank" rel="noopener noreferrer">
+              <img src={getIcon(app.href)} alt={app.href} />
+            </a>
+          ))}
+        </div>
           <div id="app-menu">
             <button onClick={toggleAppView}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24" height="24">

@@ -46609,6 +46609,27 @@ function App() {
     });
     setApps(parsedApps);
   }
+  /*アイコンシステム*/
+  const localIconMap = {
+    'steam:': 'https://store.steampowered.com/favicon.ico',
+    'files-stable:': 'https://www.google.com/s2/favicons?domain=https://files.community/&sz=256'
+  };
+  const getIcon = href => {
+    try {
+      const url = new URL(href);
+      if (localIconMap[url.protocol]) {
+        return localIconMap[url.protocol];
+      }
+      if (localIconMap[url.hostname]) {
+        return localIconMap[url.hostname];
+      }
+      // 通常の web favicon
+      return `https://www.google.com/s2/favicons?sz=256&domain=${url.hostname}`;
+    } catch {
+      // URL として解釈できない場合
+      return '/app-icons/defalt.png';
+    }
+  };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     id: "dock-area",
     style: {
@@ -46629,19 +46650,15 @@ function App() {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     id: "pinned-app"
-  }, apps.map((app, i) => {
-    const domain = new URL(app.href).hostname;
-    const faviconUrl = `https://www.google.com/s2/favicons?sz=256&domain=${domain}`;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      key: i,
-      href: app.href,
-      target: "_blank",
-      rel: "noopener noreferrer"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-      src: faviconUrl,
-      alt: app.href
-    }));
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, apps.map((app, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    key: i,
+    href: app.href,
+    target: "_blank",
+    rel: "noopener noreferrer"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+    src: getIcon(app.href),
+    alt: app.href
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     id: "app-menu"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: toggleAppView
