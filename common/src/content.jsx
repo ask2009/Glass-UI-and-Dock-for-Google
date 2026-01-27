@@ -42,7 +42,6 @@ import './component/theme.css';
 import './component/utilities.css';
 
 
-
 function App() {
   const appViewRef = useRef(null);
   const [dockVisible, setDockVisible] = useState(true);
@@ -59,6 +58,7 @@ function App() {
   // Google検索ページで Dock の表示制御
   useEffect(() => {
     if (!window.location.href.includes("google.com/search?")) return;
+    
 
     const checkVisibility = () => {
       const target = document.querySelector(".AaVjTc");
@@ -114,6 +114,7 @@ function App() {
     ? browser.storage
     : null;
 
+  // Pinned Apps (Dock用)
   const [apps, setApps] = useState([
     { href: "https://chatgpt.com" },
     { href: "https://icloud.com" },
@@ -125,8 +126,19 @@ function App() {
   ]);
 
   const [pinnedAppInput, setPinnedAppInput] = useState(""); 
+  
+  // Other Apps (App View用)
+  const [otherApps, setOtherApps] = useState([
+    { href: "https://github.com" },
+    { href: "https://copilot.com" },
+    { href: "https://instagram.com" },
+  ]);
+
+  const [otherAppInput, setOtherAppInput] = useState(""); 
+
   useEffect(() => {
     (async () => {
+      // Pinned Appsの読み込み
       const result = await storage.local.get("pinnedApps");
       const savedApps = result.pinnedApps ?? [];
       if (savedApps.length) {
@@ -134,6 +146,16 @@ function App() {
         setPinnedAppInput(JSON.stringify(savedApps, null, 2));
       } else {
         setPinnedAppInput(JSON.stringify(apps, null, 2));
+      }
+
+      // Other Appsの読み込み
+      const otherResult = await storage.local.get("otherApps");
+      const savedOtherApps = otherResult.otherApps ?? [];
+      if (savedOtherApps.length) {
+        setOtherApps(savedOtherApps);
+        setOtherAppInput(JSON.stringify(savedOtherApps, null, 2));
+      } else {
+        setOtherAppInput(JSON.stringify(otherApps, null, 2));
       }
     })();
   }, []);
@@ -143,6 +165,13 @@ function App() {
     await storage.local.set({ pinnedApps: parsedApps });
     setApps(parsedApps);
   }
+
+  async function handleApplyOtherApp() {
+    const parsedApps = JSON.parse(otherAppInput);
+    await storage.local.set({ otherApps: parsedApps });
+    setOtherApps(parsedApps);
+  }
+
   /*アイコンシステム*/
   const localIconMap = {
     // ゲーム・ランチャー
@@ -250,7 +279,11 @@ function App() {
           <TabPanels>
             <TabPanel id="home">
               <div id="app-view-content">
-                <a href="https://toshin.com/">東進</a>
+                {otherApps.map((app, i) => (
+                  <a key={i} href={app.href} target="_blank" rel="noopener noreferrer">
+                    <img src={getIcon(app.href)} alt={app.href} />
+                  </a>
+                ))}
               </div>
             </TabPanel>
             <TabPanel id="setting">
@@ -270,15 +303,15 @@ function App() {
                 </Disclosure>
                 <Disclosure>
                   <Heading>
-                    <Button slot="trigger"  className="disclosure-button">other App<ChevronRight className="chevron" size={16}/>
+                    <Button slot="trigger"  className="disclosure-button">Other App<ChevronRight className="chevron" size={16}/>
                     </Button>
                   </Heading>
                   <DisclosurePanel class="setting-panel">
                     <TextField>
                       <Label>Select apps</Label>
-                      <TextArea className="react-aria-TextArea inset setting-text-area"></TextArea>
+                      <TextArea className="react-aria-TextArea inset setting-text-area" value={otherAppInput} onChange={(e) => setOtherAppInput(e.target.value)}></TextArea>
                     </TextField>
-                    <Button className="react-aria-Button button-base">apply</Button>
+                    <Button className="react-aria-Button button-base" onPress={handleApplyOtherApp}>apply</Button>
                   </DisclosurePanel>
                 </Disclosure>
               </div>
@@ -299,4 +332,3 @@ const container = document.createElement("div");
 document.body.prepend(container);
 const root = createRoot(container);
 root.render(<App />);
-

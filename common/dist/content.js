@@ -46574,6 +46574,8 @@ function App() {
 
   /*設定処理*/
   const storage = typeof chrome !== "undefined" && chrome.storage ? chrome.storage : typeof browser !== "undefined" ? browser.storage : null;
+
+  // Pinned Apps (Dock用)
   const [apps, setApps] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([{
     href: "https://chatgpt.com"
   }, {
@@ -46590,8 +46592,19 @@ function App() {
     href: "https://x.com"
   }]);
   const [pinnedAppInput, setPinnedAppInput] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
+
+  // Other Apps (App View用)
+  const [otherApps, setOtherApps] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([{
+    href: "https://github.com"
+  }, {
+    href: "https://copilot.com"
+  }, {
+    href: "https://instagram.com"
+  }]);
+  const [otherAppInput, setOtherAppInput] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("");
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     (async () => {
+      // Pinned Appsの読み込み
       const result = await storage.local.get("pinnedApps");
       const savedApps = result.pinnedApps ?? [];
       if (savedApps.length) {
@@ -46599,6 +46612,16 @@ function App() {
         setPinnedAppInput(JSON.stringify(savedApps, null, 2));
       } else {
         setPinnedAppInput(JSON.stringify(apps, null, 2));
+      }
+
+      // Other Appsの読み込み
+      const otherResult = await storage.local.get("otherApps");
+      const savedOtherApps = otherResult.otherApps ?? [];
+      if (savedOtherApps.length) {
+        setOtherApps(savedOtherApps);
+        setOtherAppInput(JSON.stringify(savedOtherApps, null, 2));
+      } else {
+        setOtherAppInput(JSON.stringify(otherApps, null, 2));
       }
     })();
   }, []);
@@ -46609,10 +46632,51 @@ function App() {
     });
     setApps(parsedApps);
   }
+  async function handleApplyOtherApp() {
+    const parsedApps = JSON.parse(otherAppInput);
+    await storage.local.set({
+      otherApps: parsedApps
+    });
+    setOtherApps(parsedApps);
+  }
+
   /*アイコンシステム*/
   const localIconMap = {
+    // ゲーム・ランチャー
     'steam:': 'https://store.steampowered.com/favicon.ico',
-    'files-stable:': 'https://www.google.com/s2/favicons?domain=https://files.community/&sz=256'
+    'com.epicgames.launcher:': 'https://www.google.com/s2/favicons?domain=epicgames.com&sz=256',
+    'minecraft:': 'https://www.google.com/s2/favicons?domain=minecraft.net&sz=256',
+    'roblox:': 'https://www.google.com/s2/favicons?domain=roblox.com&sz=256',
+    'battle.net:': 'https://www.google.com/s2/favicons?domain=blizzard.com&sz=256',
+    'uplay:': 'https://www.google.com/s2/favicons?domain=ubisoft.com&sz=256',
+    // ブラウザ
+    'microsoft-edge:': 'https://www.google.com/s2/favicons?domain=microsoft.com&sz=256',
+    'chrome:': 'https://www.google.com/s2/favicons?domain=google.com&sz=256',
+    'firefox:': 'https://www.google.com/s2/favicons?domain=mozilla.org&sz=256',
+    // 開発・ツール
+    'vscode:': 'https://www.google.com/s2/favicons?domain=visualstudio.microsoft.com&sz=256',
+    'visualstudio:': 'https://www.google.com/s2/favicons?domain=visualstudio.microsoft.com&sz=256',
+    'github:': 'https://www.google.com/s2/favicons?domain=github.com&sz=256',
+    'docker:': 'https://www.google.com/s2/favicons?domain=docker.com&sz=256',
+    'terminal:': 'https://www.google.com/s2/favicons?domain=gnu.org&sz=256',
+    // 仕事・ドキュメント
+    'ms-word:': 'https://www.google.com/s2/favicons?domain=microsoft.com&sz=256',
+    'ms-excel:': 'https://www.google.com/s2/favicons?domain=microsoft.com&sz=256',
+    'ms-powerpoint:': 'https://www.google.com/s2/favicons?domain=microsoft.com&sz=256',
+    'ms-windows-store:': 'https://www.google.com/s2/favicons?domain=microsoft.com&sz=256',
+    // コミュニケーション
+    'discord:': 'https://www.google.com/s2/favicons?domain=discord.com&sz=256',
+    'slack:': 'https://www.google.com/s2/favicons?domain=slack.com&sz=256',
+    'teams:': 'https://www.google.com/s2/favicons?domain=microsoft.com&sz=256',
+    'mailto:': 'https://www.google.com/s2/favicons?domain=outlook.com&sz=256',
+    // メディア
+    'spotify:': 'https://www.google.com/s2/favicons?domain=spotify.com&sz=256',
+    'youtube:': 'https://www.google.com/s2/favicons?domain=youtube.com&sz=256',
+    'netflix:': 'https://www.google.com/s2/favicons?domain=netflix.com&sz=256',
+    // ファイル・クラウド
+    'files-stable:': 'https://www.google.com/s2/favicons?domain=files.community&sz=256',
+    'onedrive:': 'https://www.google.com/s2/favicons?domain=onedrive.live.com&sz=256',
+    'google-drive:': 'https://www.google.com/s2/favicons?domain=drive.google.com&sz=256'
   };
   const getIcon = href => {
     try {
@@ -46680,9 +46744,15 @@ function App() {
     id: "home"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     id: "app-view-content"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    href: "https://toshin.com/"
-  }, "\u6771\u9032"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_6__.TabPanel, {
+  }, otherApps.map((app, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    key: i,
+    href: app.href,
+    target: "_blank",
+    rel: "noopener noreferrer"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+    src: getIcon(app.href),
+    alt: app.href
+  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_6__.TabPanel, {
     id: "setting"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_3__.Disclosure, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_4__.Heading, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     slot: "trigger",
@@ -46702,15 +46772,18 @@ function App() {
   }, "apply"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_3__.Disclosure, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_4__.Heading, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     slot: "trigger",
     className: "disclosure-button"
-  }, "other App", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }, "Other App", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], {
     className: "chevron",
     size: 16
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_3__.DisclosurePanel, {
     class: "setting-panel"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_8__.TextField, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_5__.Label, null, "Select apps"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_7__.TextArea, {
-    className: "react-aria-TextArea inset setting-text-area"
+    className: "react-aria-TextArea inset setting-text-area",
+    value: otherAppInput,
+    onChange: e => setOtherAppInput(e.target.value)
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_aria_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-    className: "react-aria-Button button-base"
+    className: "react-aria-Button button-base",
+    onPress: handleApplyOtherApp
   }, "apply")))))))));
 }
 const container = document.createElement("div");

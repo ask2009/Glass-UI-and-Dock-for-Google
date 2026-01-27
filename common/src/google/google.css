@@ -32,9 +32,16 @@ html, body {
 .jFulub,
 #fbarcnt,
 #oFNiHe,
+.N6uHOd,
+.vSgDqf,
+.rfiSsc,
+.pdswFd,
 .KxwPGc .AghGtd /*広告、ビジネス、検索の仕組み*/ 
 {
     display: none !important;
+}
+.wv9iH {
+    display: block !important;
 }
 
 
@@ -81,4 +88,8 @@ body {
 .cF4V5c {
     background-color: var(--glass-color) !important;
     backdrop-filter: var(--drop);
+}
+
+.rQTE8b {
+    justify-content: flex-start !important;/*検索画面の画像の切り替え部*/
 }

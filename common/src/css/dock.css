@@ -58,6 +58,7 @@
     align-items: center;  /* ←追加 */
     height: 100%;
     margin: 0;
+    margin-left: 4px;
 }
 
 #pinned-app {
